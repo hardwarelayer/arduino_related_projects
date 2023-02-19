@@ -1,0 +1,111 @@
+#include <bmps.h>
+#include <ST7565_homephone_esp8266.h>
+
+#define PIN_WIRE_SDA (4)
+#define PIN_WIRE_SCL (5)
+
+//static const uint8_t SDA = PIN_WIRE_SDA;
+//static const uint8_t SCL = PIN_WIRE_SCL;
+
+//static const uint8_t LED_BUILTIN = 16;
+//static const uint8_t BUILTIN_LED = 16;
+
+static const uint8_t D0   = 16;
+static const uint8_t D1   = 5;
+static const uint8_t D2   = 4;
+static const uint8_t D3   = 0;
+static const uint8_t D4   = 2;
+static const uint8_t D5   = 14;
+static const uint8_t D6   = 12;
+static const uint8_t D7   = 13;
+static const uint8_t D8   = 15;
+static const uint8_t D9   = 3;
+static const uint8_t D10  = 1;
+
+ST7565 lcd(D0, D1, D2, D3);//b
+ 
+ 
+void setup()   {  
+  lcd.ON();//c
+  lcd.SET(22,0,0,0,4);   //d
+
+  pinMode(D7, OUTPUT);
+  pinMode(D8, OUTPUT);
+}
+
+void loop(){
+
+  digitalWrite(D7, HIGH);
+  digitalWrite(D8, LOW);
+
+  lcd.Uni_String(0,0,u"TL",BLACK);
+  lcd.Uni_String(110,0,u"TR",BLACK);
+  lcd.Uni_String(0,50,u"BL",BLACK);
+  lcd.Uni_String(110,50,u"BR",BLACK);
+  lcd.Display();
+  delay(2000);
+  lcd.Clear();
+
+  digitalWrite(D7, LOW);
+  digitalWrite(D8, HIGH);
+
+  lcd.Asc_String(0, 10, "ABCDEFGHIJKLMNOPQRSTUVXYZ", BLACK);
+  lcd.Asc_String(0, 50, "Cai gi day ky nay?", BLACK);
+  lcd.Display();
+  delay(3000);
+  lcd.Clear();
+
+  lcd.Rect(40,30,30,20,BLACK);
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+  
+  lcd.Tri(60,10,30,40,90,40,BLACK);
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+
+  lcd.FillRect(40,30,40,20,BLACK);
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+
+  lcd.Elip( 60,30,20,10,BLACK);
+  
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+
+  lcd.Corner( 30,20,60,30,8,BLACK);
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+
+  lcd.FillTri(30,20,90,40,60,10,BLACK);
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+
+  lcd.FillCircle( 60,30,20,BLACK);
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+
+  lcd.Uni_Char(63,10,u'A',BLACK);//A
+  //c2:
+  const static char16_t text=u'\x1ED8';//Ộ
+  lcd.Uni_Char(63,31,text,BLACK);
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+
+  //c1:
+  lcd.Uni_String( 30, 15, u"\x111\x1ECF", BLACK);//đỏ
+  //c2:
+  const static char16_t text2[] PROGMEM =u"\x111\x65n";//đen
+  lcd.Uni_String( 30, 35,text2, BLACK);
+
+  lcd.Display();
+  delay(1000);
+  lcd.Clear();
+}  
