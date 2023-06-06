@@ -9,10 +9,15 @@ Use the USB to UART CP2102 driver
 The pins:
 
 MiniEVB	Module CP2102
+
 VCC	VCCIO
+
 GND	GND
+
 RXI	TXD
+
 TX0	RXD
+
 DTR	DTR
 
 
